@@ -1,0 +1,375 @@
+I want to see a doctor	Consult
+I would like to see a doctor	Consult
+Show me nearest doctors	Consult
+Show me doctors list	Consult
+I want to see a physician	Consult
+I want to see a therapist	Consult
+I want to see a dermatologist	Consult
+I would like to see a physician	Consult
+I would like to see a therapist	Consult
+I would like to see a dermatologist	Consult
+Who is the most famous doctor	Consult
+Where are doctors	Consult
+Where are nearby doctors	Consult
+Who are the dentists i can see?	Consult
+What are the doctors that I can see?	Consult
+Show me best doctors	Consult
+Show me the best doctor	Consult
+Show me the best psychiatrist	Consult
+Are there any doctors available?	Consult
+Are there any cardiologists available?	Consult
+Show me some doctors	Consult
+I want to see a doctor	Consult
+I would like to see a doctor	Consult
+Show me doctors	Consult
+Can i see a doctor	Consult
+Can you show me some doctors	Consult
+What are the doctors that you know	Consult
+What are the physicians that you know	Consult
+What are the gastroenterologists that you know	Consult
+What are the skin specialists that you know	Consult
+Do you know any doctors	Consult
+Do you know any pediatrician	Consult
+Do you know any gynecologist	Consult
+Who is a doctor here	Consult
+Who is a dermatologist here	Consult
+Who is a nephrologist here	Consult
+Hello DrBot, can you show me some doctors	Consult
+Hello Bot, show me some doctors	Consult
+Hey can you show me doctors nearby	Consult
+Hey can you show me some good doctors	Consult
+Hey can you show me some good pulmonologist	Consult
+Hey show me some doctors	Consult
+Please show me some doctors	Consult
+I want to consult a doctor	Consult
+I am sick, I want to see a doctor	Consult
+I am sick I want to consult a doctor	Consult
+Hey show me some radiologist	Consult
+I want to consult a anesthesiologist	Consult
+Can you consult me a doctor	Consult
+Can you consult me to a doctor	Consult
+Can you consult me a dermatologist	Consult
+Can you consult me to a gastrologist	Consult
+Consult me a doctor	Consult
+Consult me some doctors	Consult
+Consult me a Immunologist	Consult
+Consult me some immunologist	Consult
+Consult me a Infectious Disease Specialist	Consult
+Consult me some Neonatologists	Consult
+Consult me doctor	Consult
+Consult me Neurologist	Consult
+Please consult me some doctors	Consult
+Please consult me a doctor	Consult
+Please consult me some Orthopedic Surgeon	Consult
+Please consult me a Orthopedic Surgeon	Consult
+Please consult me Pediatrician	Consult
+Please consult me a Physiologist	Consult
+Consult me a Physiologist	Consult
+Consult me some Rheumatologist	Consult
+I want to consult a Rheumatologist	Consult
+I want to consult a Urologist	Consult
+Consult a Urologist	Consult
+Consult me a Dentist	Consult
+Do you have any idea about nearby doctors	Consult
+Do you have any idea about nearby Dentists	Consult
+What are some doctors here	Consult
+What are some good doctors here	Consult
+What are some Anesthesiologists here	Consult
+What are some good Anesthesiologists here	Consult
+Do you know any Medical Geneticist	Consult
+I want to see a Medical Geneticist	Consult
+I would like to see a Microbiologist	Consult
+I need to see a Microbiologist	Consult
+I need to see Neurologist	Consult
+I need to see a Obstetrician	Consult
+Are there any good doctors	Consult
+Are there any doctors	Consult
+Are there any good Obstetricians	Consult
+Are there any ENT Specialists	Consult
+Do you know the list of doctors	Consult
+List nearby doctors	Consult
+Show me nearby doctors	Consult
+Do you know the list of Plastic Surgeon	Consult
+Do you know the list of Podiatrists	Consult
+List nearby Podiatrist	Consult
+List nearby Allergist	Consult
+Show me nearby Allergists	Consult
+Show me nearby Cardiologist	Consult
+Hey I want to consult a anesthesiologist	Consult
+Hey Can you consult me a doctor	Consult
+Hey Can you consult me to a doctor	Consult
+Hey Can you consult me a dermatologist	Consult
+Hey Can you consult me to a gastrologist	Consult
+Hey Consult me a doctor	Consult
+Hey Consult me some doctors	Consult
+Hey Consult me a Immunologist	Consult
+Hey Consult me some immunologist	Consult
+Hey Consult me a Infectious Disease Specialist	Consult
+Hey Consult me some Neonatologists	Consult
+I am in urgent need of a doctor	Consult
+I urgently need a doctor	Consult
+I have an emergency	Consult
+I am having an emergency situation	Consult
+This is an emergency situation, find me a doctor	Consult
+I need a doctor	Consult
+I need a doctor urgently	Consult
+I am compelling to see a doctor	Consult
+I am in urgent need of a Psychiatrist	Consult
+I urgently need a Psychiatrist	Consult
+I have an emergency	Consult
+I am having an emergency situation	Consult
+This is an emergency situation, find me a Pulmonologist	Consult
+I need a doctor	Consult
+I need a Pulmonologist urgently	Consult
+I am compelling to see a Surgeon	Consult
+I am in urgent need of a Surgeon	Consult
+I urgently need a Oncologist	Consult
+I have an emergency	Consult
+I am having an emergency situation	Consult
+This is an emergency situation, find me a Oncologist	Consult
+I need a Cardiologist	Consult
+I need a Cardiologist urgently	Consult
+I am compelling to see a Cardiologist	Consult
+Show me a doctor's list	Consult
+Show me Dentist's list	Consult
+Can i talk to a doctor	Consult
+Can i talk to a Dentist	Consult
+Forward me to a doctor	Consult
+Forward me to a Neurologist	Consult
+I want to talk to a doctor	Consult
+Forward me to a fucking doctor	Consult
+Let me speak to a doctor	Consult
+I want to speak to a doctor	Consult
+I am suffering from fever	Symptom/Disease
+I suffer from fever	Symptom/Disease
+I am afflicted with fever	Symptom/Disease
+I am suffering from headache and nausea	Symptom/Disease
+I'm having a fever.	Symptom/Disease
+I'm in profound trouble	Symptom/Disease
+I'm in profound sorrow	Symptom/Disease
+I have a headache and nausea	Symptom/Disease
+can u help me with my headache	Symptom/Disease
+Can you help me with my headaches?	Symptom/Disease
+Can you help me with my sickness?	Symptom/Disease
+I don't understand what's wrong with the symptoms I have, kindly assist me.	Symptom/Disease
+I don't know what's wrong, please help me with the symptoms I have.	Symptom/Disease
+I don't understand what's wrong with my symptoms, please assist me.	Symptom/Disease
+I don't know what's wrong with the symptoms that I have, please help me.	Symptom/Disease
+I want to be cured, I am having headache since last week.	Symptom/Disease
+I want to be healed, since last week I've had headache.	Symptom/Disease
+I want to be healed, I've had pain in my head.	Symptom/Disease
+I don't know what's wrong, but my ankle is paining very badly.	Symptom/Disease
+I don't understand what's wrong, but it's very bad for my ankle.	Symptom/Disease
+I don't understand what's wrong, but it's very painful for my ankle.	Symptom/Disease
+I don't know what's wrong with that, but my ankle is very painful.	Symptom/Disease
+Give me the reason, why my ass is bleeding?	Symptom/Disease
+Give me the reason for the bleeding of my ass?	Symptom/Disease
+Give me the reason why my ass bleeds?	Symptom/Disease
+How can I get rid of my fatigue?	Symptom/Disease
+How can I get rid of my tiredness.	Symptom/Disease
+How do I get rid of my fatigue?	Symptom/Disease
+Since last night I am having constipation.	Symptom/Disease
+I've had constipation since last night.	Symptom/Disease
+I have been having constipation since last night.	Symptom/Disease
+I've been having digestive problems since last night.	Symptom/Disease
+I've been having diarrhoea since last night.	Symptom/Disease
+I've been having joint pain since last night.	Symptom/Disease
+I've been having joint pain since the first week of August.	Symptom/Disease
+I've had indigestion since last summer.	Symptom/Disease
+I have been having heartburn since last night.	Symptom/Disease
+I have been having constipation since last night.	Symptom/Disease
+Since last weekend, I've had cramps.	Symptom/Disease
+I am having chills and cold from a very long time.	Symptom/Disease
+From a very long period of time I've had chills and cold.	Symptom/Disease
+can i get rid of my cold and cough anyhow?	Symptom/Disease
+Anyway, can I get rid of my cold and cough?	Symptom/Disease
+Either way, can I get rid of my cold and cough?	Symptom/Disease
+There is a swelling in my face, fingers, feet, or lower legs. Can you do something?	Symptom/Disease
+My face, fingers, feet, or lower legs are swelling. Can you do anything?	Symptom/Disease
+My face, my fingers, feet, or lower legs are swelling. Can you do something about that?	Symptom/Disease
+In my face, fingers, feet, or lower legs there's a swelling. Can you do something about this?	Symptom/Disease
+I am feeling dizziness, faintness, or lightheadedness when getting up from a lying or sitting position suddenly	Symptom/Disease
+I have had cold spots and scars on my upper abdomen for the last few days.	Symptom/Disease
+Since last few days I am having cold spots and scars on my lower body.	Symptom/Disease
+I've had cold spots and scars on my reduced body for the last few days.	Symptom/Disease
+I have had cold spots and scars on my lower body for the last couple of days.	Symptom/Disease
+I have had dark spots and red marks on my leg muscles for the last couple weeks.	Symptom/Disease
+For the last few weeks, I've had dark spots and red marks on my leg muscles.	Symptom/Disease
+Over the last few weeks, I've had dark spots and red marks on my leg muscles.	Symptom/Disease
+Over the last several weeks, I've had age spots and red marks on my glutes.	Symptom/Disease
+I've had age spots and red marks on my glutes over the last few weeks.	Symptom/Disease
+I've had age spots and red marks on my glutes over the past several weeks.	Symptom/Disease
+Tell me what is the reason for my swollen joints.	Symptom/Disease
+Tell me why I have swollen joints.	Symptom/Disease
+Tell me why my sore joints are so.	Symptom/Disease
+Tell me why my swollen joints are caused.	Symptom/Disease
+Give me the reason for my itchy skin.	Symptom/Disease
+Give me the reason why my skin is itchy.	Symptom/Disease
+Please give me the reason for my itchy skin.	Symptom/Disease
+Just give me the reason for my itchy skin.	Symptom/Disease
+There's a difficulty in breathing.	Symptom/Disease
+There is a difficulty in my breathing.	Symptom/Disease
+There's a difficulty with my breathing.	Symptom/Disease
+In my breathing, there is a difficulty.	Symptom/Disease
+There's a difficulty in breathing.	Symptom/Disease
+How can I get relieved from pain and swelling on the foot.	Symptom/Disease
+How can I be relieved of the pain and swelling of my foot?	Symptom/Disease
+How can I get relieved of the pain and swelling of my foot?	Symptom/Disease
+Red, painful, fluid-filled blister  appears near the mouth and lips since many days	Symptom/Disease
+Red, painful, fluid-filled blister has appeared for many days close the mouth and lips	Symptom/Disease
+Red, painful, fluid-filled blister has been appearing near the mouth and lips for many days now.	Symptom/Disease
+Red, painful, fluid-filled blister has been appearing for many days close the mouth and lips	Symptom/Disease
+Red, painful, fluid-filled blister appears for many days near the mouth and lips	Symptom/Disease
+Red, painful, fluid-filled blister has been appearing near the mouth and lips for several days.	Symptom/Disease
+I have Itchy, raised welts, small, round on my face.	Symptom/Disease
+I've got Itchy, raised welts, small, round on my face.	Symptom/Disease
+I got Itchy, raised welts, small, round on my face.	Symptom/Disease
+I've got itchy, welts raised, tiny, round on my face.	Symptom/Disease
+I've got itchy, welts raised, little, round on my face.	Symptom/Disease
+Red, painful, and irritated lump under my skin with fever from three days.	Symptom/Disease
+I have red, painful, and three-day lump irritated under my skin and fever.	Symptom/Disease
+I have red lump under my skin and fever from three days, sore and annoyed.	Symptom/Disease
+I have a red, painful, and irritated lump under my skin and a fever of three days.	Symptom/Disease
+I am having red, painful, and irritated lump under my skin and fever from three days.	Symptom/Disease
+I am having red rash spreads from the face down the body from five days	Symptom/Disease
+From five days I have red rash spreading from the face down the body	Symptom/Disease
+From five days, I have red rash spread from the face down the body	Symptom/Disease
+For five days, I have red rash spreading from the face down the body	Symptom/Disease
+I have red rash spreading from the face down the body over five days.	Symptom/Disease
+I have a red rash spread from my face down my body for five days.	Symptom/Disease
+I am having trouble concentrating, remembering details, and making decisions and fatigue	Symptom/Disease
+I have trouble concentrating, remembering details, and making decisions and tiredness	Symptom/Disease
+I'm having trouble concentrating, remembering details, making decisions and getting tired.	Symptom/Disease
+I have trouble focusing, remembering the information, making choices and tiredness	Symptom/Disease
+I have trouble focusing, remembering the information, making choices and getting tired.	Symptom/Disease
+I have difficulty concentrating, remembering the details and making decisions and tiredness	Symptom/Disease
+I have trouble concentrating, remembering details, making decisions and tiredness	Symptom/Disease
+I have trouble concentrating, remembering the details, making decisions and making tiredness	Symptom/Disease
+I am feeling excessive thirst and hunger and frequent urination.	Symptom/Disease
+I feel excessive thirst, starvation, and urination frequently.	Symptom/Disease
+I feel excessive thirst and hunger and urination frequently.	Symptom/Disease
+I feel an excessive thirst and hunger and a frequent urination.	Symptom/Disease
+I feel exaggerated thirst and hunger and frequent urination.	Symptom/Disease
+I feel an excess of thirst and hunger and frequent urination.	Symptom/Disease
+I had bleeding and swollen gums after brushing.	Symptom/Disease
+After brushing, I had blood and swollen gums.	Symptom/Disease
+After brushing, I had bleeding and gums swollen.	Symptom/Disease
+After the brushing, I had bleeding and swollen gums.	Symptom/Disease
+After I brushed, I had bleeding and swollen gums.	Symptom/Disease
+After I was brushing, I had bleeding and swollen gums.	Symptom/Disease
+I feel pain with chewing and biting	Symptom/Disease
+I feel the pain of chewing and biting	Symptom/Disease
+I feel chewing and biting pain	Symptom/Disease
+I feel pain when I chew and bit	Symptom/Disease
+With chewing and biting, I feel pain	Symptom/Disease
+I am having frequent dry mouth with bad breath.	Symptom/Disease
+I often have a dry mouth with a bad breath.	Symptom/Disease
+I often have a bad breath in my dry mouth.	Symptom/Disease
+I often have a bad breath with a dry mouth.	Symptom/Disease
+With bad breath, I often have a dry mouth.	Symptom/Disease
+I have a frequent dry mouth with a bad breath.	Symptom/Disease
+I have a very frequent dry mouth with a bad breath.	Symptom/Disease
+book flight tickets	OutOfDomain
+i want to book a hotel	OutOfDomain
+i want to book a flight	OutOfDomain
+book hotel	OutOfDomain
+book movie tickets	OutOfDomain
+I want to book a movie ticket	OutOfDomain
+Show me movies near me	OutOfDomain
+Show me latest movies	OutOfDomain
+Show me flights from a to b	OutOfDomain
+I want to see flights from x to y	OutOfDomain
+i want to book flight tickets from abcd to xyza	OutOfDomain
+show me hotels near me	OutOfDomain
+show me hotels in x	OutOfDomain
+what are the best hotels here	OutOfDomain
+show me movies in a	OutOfDomain
+show me best movies available	OutOfDomain
+i want to eat pizza	OutOfDomain
+i want to eat burger	OutOfDomain
+i want to drink coffee	OutOfDomain
+i want to drink tea	OutOfDomain
+show me nearby restaurants	OutOfDomain
+show me best restaurants	OutOfDomain
+what are the best restaurants here	OutOfDomain
+list of good restaurants	OutOfDomain
+bars near me	OutOfDomain
+show me some bars	OutOfDomain
+show me some salons	OutOfDomain
+i want to go to a bar	OutOfDomain
+i want to go to a salon	OutOfDomain
+show me cafeteria	OutOfDomain
+i want to eat in a cafeteria	OutOfDomain
+where can i have good lunch	OutOfDomain
+show me places for dinner	OutOfDomain
+where can i have breakfast	OutOfDomain
+show me places for lunch	OutOfDomain
+show me places for dinner	OutOfDomain
+show me places for breakfast	OutOfDomain
+i want to order food	OutOfDomain
+i want to order a pizza	OutOfDomain
+i want to order a burger	OutOfDomain
+how long is burj khalifa	OutOfDomain
+order food	OutOfDomain
+order pizza	OutOfDomain
+order coffee	OutOfDomain
+i want to buy a book	OutOfDomain
+i want to buy a car	OutOfDomain
+i want to rent a bike	OutOfDomain
+rent a bike	OutOfDomain
+rent a car	OutOfDomain
+what is the price of iphone x	OutOfDomain
+ is the price of samsung galaxy s10	OutOfDomain
+what is the price of asus	OutOfDomain
+show me the list of asus laptops	OutOfDomain
+i want to buy a laptop	OutOfDomain
+i want to buy a phone	OutOfDomain
+my phone is not working	OutOfDomain
+my charger is not working	OutOfDomain
+i have a broken phone	OutOfDomain
+show me the best prices for iphone	OutOfDomain
+how is the weather today	OutOfDomain
+what is the current temperature	OutOfDomain
+when was the hottest day	OutOfDomain
+when did steve jobs die	OutOfDomain
+who is barrack obama	OutOfDomain
+who is george bush	OutOfDomain
+who is devesh tewari	OutOfDomain
+how to lose weight	OutOfDomain
+i want to get slim	OutOfDomain
+do you have a brain	OutOfDomain
+do you have sex	OutOfDomain
+i want to have sex	OutOfDomain
+what do you look like	OutOfDomain
+can i see your body	OutOfDomain
+what is your age	OutOfDomain
+what is your height	OutOfDomain
+what are your hobbies	OutOfDomain
+what is your heart rate	OutOfDomain
+what are your intentions	OutOfDomain
+do you have hands	OutOfDomain
+do you go to college	OutOfDomain
+do you go to school	OutOfDomain
+do you walk	OutOfDomain
+do you think	OutOfDomain
+how do you think	OutOfDomain
+how do you tell me answers	OutOfDomain
+do you have a leg	OutOfDomain
+what does AX mean	OutOfDomain
+what does abx mean	OutOfDomain
+what does x mean	OutOfDomain
+what does q mean	OutOfDomain
+what is the meaning of mean	OutOfDomain
+what is the meaning of bot	OutOfDomain
+what is the meaning of robot	OutOfDomain
+all the region	OutOfDomain
+where is the bathroom	OutOfDomain
+where is the toilet	OutOfDomain
+where is x	OutOfDomain
+where do you exist	OutOfDomain
+when will you become x	OutOfDomain
+when will you become y	OutOfDomain
+how much do you weigh	OutOfDomain
+do you have wife	OutOfDomain
+do you have husband	OutOfDomain
+who will be the next president	OutOfDomain

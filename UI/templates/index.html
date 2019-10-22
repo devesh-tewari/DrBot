@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Medical Chatbot Design</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/liquid_slider.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/liquid_slider.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+	<script type="text/javascript">
+		var id=0;
+		function appendMessage(message, by, msg_type) {
+			if(by == 'human') {
+				$('#user_message').val('');
+				$('<div>',{
+					'class' : 'chat self',
+					'html': $('<div>',{
+						'class' : 'user-photo',
+						'html' : $('<img>').attr("src", "{{ url_for('static', filename='images/self.png') }}")
+					}).add($('<p>',{
+					    'class' : 'chat-message',
+					    'text': message[0]
+				  	}))
+				}).appendTo('.chatlogs');				
+			} else if(by == 'bot' && msg_type == 'chat_msg') {
+				$('<div>',{
+					'class' : 'chat bot',
+					'html': $('<div>',{
+					    'class' : 'user-photo',
+					    'html' : $('<img>').attr("src", "{{ url_for('static', filename='images/bot.png') }}")
+					}).add($('<p>',{
+					    'class' : 'chat-message',
+					    'text': message[0]
+					}))
+				}).appendTo('.chatlogs');
+			} else if(msg_type == 'display_cards') {
+				id+=1;
+				$('<section>', {
+					'class': 'liquid-slider',
+					'id': 'idNum'+id.toString()
+				}).appendTo('.chatlogs');
+
+				for(var i=0;i<message.length;i++) {
+					$('<div>', {
+						'class': 'card',
+						'html': $('<img>', {
+							'class': 'entry_img',
+							'src': message[i].image
+						}).css({'border-radius':'50%', 'float':'left', 'height':'70px', 'width':'70px'}).add($('<div>', {
+							'class': 'entry_details',
+							'html': $('<span>',{
+								'class': 'entry_name',
+								'text': 'Name: '+message[i].name
+							}).css({'display':'block'}).add($('<span>',{
+								'class': 'entry_type',
+								'text': 'Type: '+message[i]['@type']
+							})).css({'display':'block'}).add($('<span>',{
+								'class': 'entry_address',
+								'text': 'Address: '+message[i]['address']['addressLocality']+', '+message[i]['address']['addressRegion']
+							})).css({'display':'block'}).add($('<a>',{
+								'href': 'https://www.google.com/maps/search/?api=1&query='+message[i]['geo']['latitude']+','+message[i]['geo']['longitude'],
+								'text': 'Map Link',
+								'target': '_blank'
+							})).add($('<a>', {
+								'href': message[i]['url'],
+								'text': 'More Details',
+								'target': '_blank'
+							})).css({'margin-left':'10px'})
+						})).css({'margin': '10px', 'font-family': 'sans-serif'})
+					}).appendTo('#idNum'+id.toString())
+					console.log(message[i]);
+				}
+
+				$('#idNum'+id.toString()).liquidSlider({
+					dynamicTabsHtml: false,
+					dynamicTabs: false,
+				});
+
+			} else if(msg_type == 'ask_options') {
+				
+			}
+
+			var scroll_bottom = $('.chatlogs');
+			var height = scroll_bottom[0].scrollHeight;
+			scroll_bottom.scrollTop(height);
+		}
+
+		$(function() {
+		  	$('#send_message').bind('click', function() {
+		  		self_message = [$('#user_message').val()];
+		  		appendMessage(self_message, 'human', '');
+		  		$.ajax({
+		            url: '/get_reply',
+		            data: $('#user_message').val(),
+		            type: 'POST',
+		            success: function(response) {
+		            	appendMessage(response.message, 'bot', response.msg_type);
+		            },
+		            error: function(error) {
+		            	appendMessage(error, 'bot', 'error');
+		                console.log(error);
+		            }
+		        });
+		  	});
+		});
+	</script>
+</head>
+<body>
+
+	<div class="chatbox">
+		<div class="chatlogs">
+			
+		</div>
+		<div class="chat-form">
+			<textarea id="user_message"></textarea>
+			<button id="send_message">Send</button>
+		</div>
+	</div>
+	
+</body>
+</html>

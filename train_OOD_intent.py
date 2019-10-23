@@ -20,7 +20,7 @@ import pickle
 
 nlp=spacy.load('en_core_web_lg')
 
-intent_dict = {'Consult':0, 'Symptom/Disease':1, 'OutOfDomain':2}
+intent_dict = {'DontUnderstand':0, 'OutOfDomain':1, 'Unknown':2, 'PassToDoctor':3, 'LeaveToHuman':4, 'Positive':5, 'Negative':6}
 
 def read_CSV_datafile(filename):
     X = []
@@ -32,8 +32,8 @@ def read_CSV_datafile(filename):
             y.append(row[1])
     return X,y
 
-filename_train = 'Datasets/main_intent_train.tsv'
-filename_test = 'Datasets/main_intent_test.tsv'
+filename_train = 'Datasets/OOD_intent_train.tsv'
+filename_test = 'Datasets/OOD_intent_test.tsv'
 
 X_train_raw, y_train_raw = read_CSV_datafile(filename = filename_train)
 X_test_raw, y_test_raw = read_CSV_datafile(filename = filename_test)
@@ -202,6 +202,12 @@ clf = LogisticRegression(C=1.0, class_weight=None, dual=False,
           solver='liblinear', tol=0.0001, verbose=0, warm_start=False)
 
 clf.fit(X_train, y_train)
-filename = 'Models/main_intent_model.sav'
+pred = clf.predict(X_test)
+score = metrics.accuracy_score(y_test, pred)
+print("accuracy:   %0.3f" % score)
+filename = 'Models/OOD_intent_model.sav'
 pickle.dump(clf, open(filename, 'wb'))
 # clf = pickle.load(open(filename, 'rb'))
+print("\nModel saved to "+filename)
+print(metrics.classification_report(y_test, pred,
+                                            target_names=['DontUnderstand', 'OutOfDomain', 'Unknown', 'PassToDoctor', 'LeaveToHuman', 'Positive', 'Negative']))

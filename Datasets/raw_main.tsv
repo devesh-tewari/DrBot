@@ -140,6 +140,40 @@ I want to talk to a doctor	Consult
 Forward me to a fucking doctor	Consult
 Let me speak to a doctor	Consult
 I want to speak to a doctor	Consult
+Is there any doctor that i can talk to	Consult
+I want to meet a doctor	Consult
+I want to see a doctor	Consult
+I want to seek advice from a doctor	Consult
+I want to seek advice from doctors	Consult
+I want to see doctors	Consult
+Can i speak to a doctor	Consult
+I want to ask questions to a doctor	Consult
+I want to ask some things to doctors	Consult
+I want to ask questions about my illness to a doctor	Consult
+Suggest me a doctor	Consult
+Suggest me a good doctor	Consult
+Suggest me some good doctors	Consult
+Suggest me doctor	Consult
+I want to get doctor's advice	Consult
+Can you forward me to a doctor	Consult
+Advise me some doctors	Consult
+Advise me some good doctors	Consult
+I want to get advise from a doctor	Consult
+I want to get counsel from a doctor	Consult
+I want to get doctor's counsel	Consult
+Can i call a doctor	Consult
+Call a doctor	Consult
+I want a doctor to examine me	Consult
+I want a doctor to examine my situation	Consult
+I want to talk to a Physician	Consult
+Forward me to a fucking Physician	Consult
+Let me speak to a Dermatologist	Consult
+I want to speak to a Dermatologist	Consult
+Is there any Dermatologist that i can talk to	Consult
+I want to meet a Dermatologist	Consult
+I want to see a Dermatologist	Consult
+I want to seek advice from a Dermatologist	Consult
+I want to seek advice from Neurologist	Consult
 I am suffering from fever	Symptom/Disease
 I suffer from fever	Symptom/Disease
 I am afflicted with fever	Symptom/Disease
@@ -215,6 +249,23 @@ There's a difficulty in breathing.	Symptom/Disease
 How can I get relieved from pain and swelling on the foot.	Symptom/Disease
 How can I be relieved of the pain and swelling of my foot?	Symptom/Disease
 How can I get relieved of the pain and swelling of my foot?	Symptom/Disease
+i have fever	Symptom/Disease
+i have cold feet	Symptom/Disease
+i have swelling	Symptom/Disease
+my hands are paining	Symptom/Disease
+i have difficulty in breathing	Symptom/Disease
+i have chest pain	Symptom/Disease
+my gums are bleeding	Symptom/Disease
+i have neck pain	Symptom/Disease
+i am suffering from neck pain	Symptom/Disease
+i am suffering from fever	Symptom/Disease
+i have high fever	Symptom/Disease
+i feel nervous	Symptom/Disease
+i feel dumb	Symptom/Disease
+i feel like not doing anything	Symptom/Disease
+i have bad thoughts	Symptom/Disease
+i feel suicidal	Symptom/Disease
+i want to suicide	Symptom/Disease
 Red, painful, fluid-filled blister  appears near the mouth and lips since many days	Symptom/Disease
 Red, painful, fluid-filled blister has appeared for many days close the mouth and lips	Symptom/Disease
 Red, painful, fluid-filled blister has been appearing near the mouth and lips for many days now.	Symptom/Disease
@@ -269,6 +320,36 @@ I often have a bad breath with a dry mouth.	Symptom/Disease
 With bad breath, I often have a dry mouth.	Symptom/Disease
 I have a frequent dry mouth with a bad breath.	Symptom/Disease
 I have a very frequent dry mouth with a bad breath.	Symptom/Disease
+i feel chills in my body	Symptom/Disease
+i have constant headache	Symptom/Disease
+i keep sneezing all the time	Symptom/Disease
+i have a sneezing problem	Symptom/Disease
+i have abdominal pain	Symptom/Disease
+my body weight is decreasing	Symptom/Disease
+i have decreased body weight	Symptom/Disease
+my muscle twitched	Symptom/Disease
+i am always sleepy	Symptom/Disease
+i feel sleepy all the time	Symptom/Disease
+i frequently blackout	Symptom/Disease
+yesterday i blacked out	Symptom/Disease
+i am feeling unwell	Symptom/Disease
+i keep vomiting	Symptom/Disease
+i feel like vomiting all the time	Symptom/Disease
+i feel chills in mt entire body	Symptom/Disease
+my body is chilling	Symptom/Disease
+i have hallucinations	Symptom/Disease
+i hallucinate	Symptom/Disease
+i feel irritated	Symptom/Disease
+i am irritated	Symptom/Disease
+my eyes are rolling	Symptom/Disease
+i have rolling eyes	Symptom/Disease
+my vision is blurred	Symptom/Disease
+i cannot see properly	Symptom/Disease
+i see blurred	Symptom/Disease
+my hands are numb	Symptom/Disease
+i get really sweaty	Symptom/Disease
+i get sweaty	Symptom/Disease
+i have redness in my body	Symptom/Disease
 book flight tickets	OutOfDomain
 i want to book a hotel	OutOfDomain
 i want to book a flight	OutOfDomain
@@ -373,3 +454,74 @@ how much do you weigh	OutOfDomain
 do you have wife	OutOfDomain
 do you have husband	OutOfDomain
 who will be the next president	OutOfDomain
+i want to book a cab	OutOfDomain
+show me some rides	OutOfDomain
+i want to ride a car	OutOfDomain
+can you book a cab for me	OutOfDomain
+i want a cab from x to y	OutOfDomain
+fjdsfj djsfjmo jfsikjfe fjeiks sdkmfje	OutOfDomain
+aowd anscmxz wojr dewm,fo bmcos	OutOfDomain
+fds fjsk cnxm	OutOfDomain
+qpdod mckx fieonsf kfnejsnk	OutOfDomain
+fndsijunfdnzcneuihfhfeidhnfd	OutOfDomain
+aaaaaaaaaaaaaaaa	OutOfDomain
+mclkdsncdh	OutOfDomain
+dmaklsjd sdnk	OutOfDomain
+i want to book a cab	OutOfDomain
+deojadj d osd s m ls w a s z oq p	OutOfDomain
+qwertyuiop	OutOfDomain
+casnjcsh hashud nsan	OutOfDomain
+fkasodk	OutOfDomain
+jjjjjjjjjjjjjjjjjjjj	OutOfDomain
+book a cab	OutOfDomain
+show me the nearest cabs	OutOfDomain
+book a cab from x to y	OutOfDomain
+i want to travel to pochinki	OutOfDomain
+travel to pochinki	OutOfDomain
+can you book a cab	OutOfDomain
+tell me a joke	OutOfDomain
+take me to the hospital	OutOfDomain
+can you kill a doctor	OutOfDomain
+kill a doctor	OutOfDomain
+can you suggest me a medicine for headache	OutOfDomain
+i want some medicines for x	OutOfDomain
+what medicine should i take if i have x	OutOfDomain
+take me to nearest hospital	OutOfDomain
+suggest me a medicine for x	OutOfDomain
+book an appointment with doctor	OutOfDomain
+i want to book an appointment with a dentist	OutOfDomain
+Can you cure my disease	OutOfDomain
+cure my disease	OutOfDomain
+can you heal me	OutOfDomain
+heal my pain	OutOfDomain
+can you bandage me	OutOfDomain
+i want a crepe bandage	OutOfDomain
+can you examine my body	OutOfDomain
+examine my body	OutOfDomain
+take a look at my fingers	OutOfDomain
+take a look at my legs	OutOfDomain
+do you feel emotions	OutOfDomain
+are you a medical chatbot	OutOfDomain
+are you a bot	OutOfDomain
+do you like the medical field	OutOfDomain
+can you answer anything about medical domain	OutOfDomain
+can i ask you any symptom	OutOfDomain
+can i ask you anything	OutOfDomain
+can i provide you any symptom i want	OutOfDomain
+can i tell you anything	OutOfDomain
+can i trust you	OutOfDomain
+do you like to sing	OutOfDomain
+can i talk to you	OutOfDomain
+will you listen to me	OutOfDomain
+Do you have a wife	OutOfDomain
+are you married	OutOfDomain
+are you single	OutOfDomain
+can you provide medicine for a disease	OutOfDomain
+can you tell a medicine for any disease	OutOfDomain
+are you a real human	OutOfDomain
+are you real	OutOfDomain
+can you think like a human	OutOfDomain
+are you a best chatbot	OutOfDomain
+are you the best bot	OutOfDomain
+can you answer anything	OutOfDomain
+can every disease be cured	OutOfDomain

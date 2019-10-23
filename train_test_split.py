@@ -9,7 +9,7 @@
 
 
 import pandas
-data = pandas.read_csv('raw.tsv', sep='\t', header=None)
+data = pandas.read_csv('Datasets/raw_main.tsv', sep='\t', header=None)
 
 # consult = data[data[1] == 'Consult']
 # sd = data[data[1] == 'Symptom/Disease']
@@ -22,5 +22,5 @@ train, test = train_test_split(data, test_size=0.2)
 # print(len(train))
 # print(len(test))
 
-train.to_csv('train.tsv', sep='\t', index=None, header=None)
-test.to_csv('test.tsv', sep='\t', index=None, header=None)
+train.to_csv('Datasets/main_intent_train.tsv', sep='\t', index=None, header=None)
+test.to_csv('Datasets/main_intent_test.tsv', sep='\t', index=None, header=None)

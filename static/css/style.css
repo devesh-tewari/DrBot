@@ -100,6 +100,11 @@ body {
 	background: rgba(0,0,0,.1);
 }
 
+.selected {
+	background-color: blue;
+    color: #fff;
+}
+
 .chat-form button {
 	background: #1ddced;
 	padding: 5px 15px;

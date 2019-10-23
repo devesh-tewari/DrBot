@@ -1,3 +1,7 @@
+import bot_logic
+import classify_intent
+import OOD_handler
+import scrapper
 import nltk
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
@@ -7,38 +11,43 @@ import json
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 import random
-import difflib
-import copy
-from fuzzywuzzy import fuzz
+from flask import Flask, render_template, request, Response
+from flask import jsonify, make_response
+import time
 
+app = Flask(__name__)
+
+push_data = []
+message_id = 0
+asked_name = False
+name = ''
+
+def write_chat(text):
+    global push_data
+    push_data.append(text)
 
 #greeting file
-gr = pd.read_csv('Greeting Dataset.csv', engine='python')
+gr = pd.read_csv('Datasets/Greeting Dataset.csv', engine='python')
 gr = np.array(gr)
 gd = gr[:,0]
 
 #thankyou file
-tu = pd.read_csv('ThankYou.csv', engine='python')
+tu = pd.read_csv('Datasets/ThankYou.csv', engine='python')
 tu = np.array(tu)
 td = gr[:,0]
 
 #welcome file
-wc = pd.read_csv('Welcome Dataset.csv', engine='python')
+wc = pd.read_csv('Datasets/Welcome Dataset.csv', engine='python')
 wc = np.array(wc)
 wd = wc[:,0]
 
-#age file
-ag = pd.read_csv('AGE Dataset.csv', engine='python')
-ag = np.array(ag)
-ad = ag[:,0]
-
 #bye file
-by = pd.read_csv('BYE Dataset.csv', engine='python')
+by = pd.read_csv('Datasets/BYE Dataset.csv', engine='python')
 by = np.array(by)
 bd = by[:,0]
 
 #name file
-nm = pd.read_csv('Name Dataset.csv', engine='python')
+nm = pd.read_csv('Datasets/Name Dataset.csv', engine='python')
 nm = np.array(nm)
 nd = nm[:,0]
 
@@ -66,335 +75,127 @@ def getName(text):
     #takes the user response and returns name of the user
     filtered = stopWords(text)
     stemmed = stemming(filtered)
-##    print("stemmed",stemmed)
     tag = nltk.pos_tag(stemmed)
-    #print(tag)
     noun=[]
     for i in range(len(tag)):
-##        print(tag[i][1])
         if ((str(tag[i][1])=='NN' or str(tag[i][1])=='NNP') and str(tag[i][0])!='name'):
             noun.append(tag[i][0])
-##    print(noun)
-##    chunkGram = r"""Chunk: {<NN+>*}  """
-##    chunkParser = nltk.RegexpParser(chunkGram)
-##    chunked = chunkParser.parse(tag)
-##    print(chunked)
-##    for i in chunked:
-##        if i != ('name', 'NN'):
-##            name = i
-##            print('i=',i[0])
-##
-##    print(name[0])
     return noun
 
 def greet():
     k = random.randint(0,50)
-    print(gd[k%11])
+    write_chat(gd[k%11])
 
 def askName():
+    global asked_name
+    asked_name = True
     k = random.randint(0,50)
-    print(nd[k%7])
-    inp = input()
-    return inp
-
-def askAge():
-    k = random.randint(0,50)
-    print(ad[k%7])
-    inp = input()
-    return inp
-
-def getAge(text):
-    #text is a sentence(string)
-    #expected output: age in number
-    filtered = stopWords(text)
-    for i in filtered:
-        try:
-            age = int(i)
-        except Exception as e:
-            continue
-    return age
-
-def askGender():
-    print('Are you a Male or a Female?')
-    inp = input()
-    return inp
-
-def sorry():
-    print('I\'m sorry I could not understand that. Let\'s try again.')
-
-def getGender(text):
-    #text is a sentence(string)
-    #expected output: 'Male' or 'Female'
-    filtered = stopWords(text)
-    flag=0
-    for i in filtered:
-        if i.lower()=='male' or i.lower()=='female':
-            gender = i
-            flag=1
-    if flag!=1:
-        return 0
-    else:
-        return gender
-
-def getEmail():
-    inp = input()
-##    sent = sent_tokenize(input)
-##    words = word_tokenize(inp)
-##    for i in words:
-##        if '@' in i:
-##            email = i
-    #tokenizing not working :(
-    return inp
-
-def smokeAndAlc():
-    print('Do you smoke?')
-    inp1 = input()
-    res1=0
-    for i in inp1:
-        stem = stemming(i)
-        if 'yes' in stem or 'yea' in stem or 'yeah' in stem:
-            res1=1
-    print('Do you consume Alcohol?')
-    inp2 = input()
-    res2=0
-    for i in inp2:
-        stem = stemming(i)
-        if 'yes' in stem or 'yea' in stem or 'yeah' in stem:
-            res2=1
-    return (res1*10)+res2
-
-def getZip():
-    inp = input()
-    #tok = word_tokenize()
-    code=0
-    for i in inp:
-        try:
-            code =code*10+int(i)
-        except Exception as e:
-            continue
-    return code
-
-def extDisease():
-    print('Before we ask you your symptoms, we would like to know your health status.')
-    print('If yout have any existing Medical Conditions or Problems, please provide them here.')
-    print('If you dont, you can reply with a \'no\'')
-    inp = input()
-    tok = word_tokenize(inp)
-    fl=0
-    for i in tok:
-        stem = stemming(i)
-        for i in tok:
-            if 'no' in tok:
-                fl=1
-                break
-    if fl==0:
-            return inp
-    else:
-        return 'Nothing Sevre'
-
-
-
-doctor_types = [line for line in open('Doctor Types.csv', 'r').readlines()[1:]]
-def consult():
-    print('Who do you want to consult?')
-    inp = input()
-    sent = sent_tokenize(inp)
-    filt_list = stopWords(inp)
-    filt = ''
-    for f in filt_list:
-        filt += str(f)+' '
-
-    for i in range(len(filt)):
-        if filt[i] == 'hospital' and i > 0:
-            hospital_name = filt[i-1]
-            return hospital_name
-
-    user_type = None
-
-    max = 0.0
-    max_len = 0
-
-    possible_doctors = []
-    for i in range(doctor_types.size):
-        words = doctor_types[i].split()
-        word_len = len(words)
-        matched_count = 0
-        for word in words:
-            if word in filt:
-                matched_count += 1
-
-        match_ratio = float(matched_count) / float(word_len)
-        if match_ratio != 0:
-            possible_doctors.append(doctor_types[i])
-        else:
-            continue
-
-        if match_ratio == 1 and max == 1 and word_len > max_len:
-            user_type = doctor_types[i]
-            max_len = word_len
-
-        if match_ratio > max:
-            max = match_ratio
-            max_len = word_len
-            user_type = doctor_types[i]
-
-    if max == 1:
-        return [user_type]
-
-    elif max >= 0.5:
-        return possible_doctors
-
-    else:
-        diff = []
-        for i in range(doctor_types.size):
-            # sequence = difflib.SequenceMatcher(isjunk=None, a=filt, b=symptoms[i])
-            # diff = sequence.ratio()
-            diff.append(fuzz.ratio(filt, doctor_types[i]))
-            possible_doctors = sorted(range(len(diff)), key=lambda i: diff[i])[-5:]
-        user_type = [doctor_types[possible_doctors[i]] for i in range(len(possible_doctors))]
-        return user_type
-
-
-
-disease_symptom = pd.read_csv('dataset_clean1.csv', engine='python')
-diseases = disease_symptom['Disease'].unique()
-symptoms = disease_symptom['Symptom'].unique()
-
-diseases = np.array(diseases, dtype='str')
-symptoms = np.array(symptoms, dtype='str')
-print(len(diseases))
-print(len(symptoms))
-
-def getSymptom():
-    print('Please tell me about your symptoms')
-    inp = input()
-    sent = sent_tokenize(inp)
-    filt_list = stopWords(inp)
-    filt = ''
-    for f in filt_list:
-        filt += str(f)+' '
-
-    user_symptom = None
-
-    max = 0.0
-    max_len = 0
-
-    possible_symptoms = []
-    for i in range(symptoms.size):
-        symp_words = symptoms[i].split()
-        word_len = len(symp_words)
-        matched_count = 0
-        for word in symp_words:
-            if word in filt:
-                matched_count += 1
-
-        match_ratio = float(matched_count) / float(word_len)
-        if match_ratio != 0:
-            possible_symptoms.append(symptoms[i])
-        else:
-            continue
-
-        if match_ratio == 1 and max == 1 and word_len > max_len:
-            user_symptom = symptoms[i]
-            max_len = word_len
-
-        if match_ratio > max:
-            max = match_ratio
-            max_len = word_len
-            user_symptom = symptoms[i]
-
-    if max == 1:
-        return [user_symptom]
-
-    elif max >= 0.5:
-        return possible_symptoms
-
-    else:
-        diff = []
-        for i in range(symptoms.size):
-            # sequence = difflib.SequenceMatcher(isjunk=None, a=filt, b=symptoms[i])
-            # diff = sequence.ratio()
-            diff.append(fuzz.ratio(filt, symptoms[i]))
-            possible_symptoms = sorted(range(len(diff)), key=lambda i: diff[i])[-5:]
-        user_symptom = [symptoms[possible_symptoms[i]] for i in range(len(possible_symptoms))]
-        return user_symptom
-
-
-def diagnose():
-    symptoms = []
-    symp = getSymptom()
-    for s in symp:
-        symptoms.append(s)
-    print('Okay so far you have provided that you have the following symptoms:')
-    for i in range(len(symptoms)):
-        print(str(i+1)+'. '+symptoms[i])
-
-    print('Are there any other symptoms that you want ot explain? You can reply to this with a "no".')
-    inp = input()
-    tok = word_tokenize(inp)
-    fl=0
-    for i in tok:
-        stem = stemming(i)
-        for i in tok:
-            if 'no' in tok:
-                fl=1
-                break
-    if fl==0:
-        symp = getSymptom()
-        for s in symp:
-            symptoms.append(s)
-
-    possible_diseases = copy.deepcopy(disease_symptom)
-    for s in symptoms:
-        possible_diseases = possible_diseases[possible_diseases['Symptom'] == s]
-
-    possible_diseases = possible_diseases.sort_values(by='Weight', ascending=False)
-
-    print(len(possible_diseases['Disease'].unique()))
-    while len(possible_diseases['Disease'].unique()) > 4:
-        print(len(possible_diseases['Disease'].unique()))
-        symptom_options = []
-        for disease in possible_diseases['Disease'].unique():
-            symp_in_this_dis = disease_symptom[possible_diseases['Disease'] == disease]['Symptom']
-            s = random.choice(symp_in_this_dis)
-            if s in symptom:
-                s = random.choice(symp_in_this_dis)
-                if s in symptom:
-                    s = random.choice(symp_in_this_dis)
-            symptom_options.append(s)
-
-        # take symptoms from user in the list new_symptoms (ask max 5 options)
-        for s in new_symptoms:
-            possible_diseases = possible_diseases[possible_diseases['Symptom'] == s]
-
-    return possible_diseases['Disease'].unique()
+    write_chat(nd[k%7])
 
 
 #Starting the conversation
 greet()
-print('I\'m DrBot, your personal health assistant.')
-print("I can help you find a doctor or I can diagnose with a simple symptom assisment.")
-ufName = askName()
-name = getName(ufName)
-# ufAge = askAge()
-# age = getAge(ufAge)
-# ufGender = askGender()
-# gender = getGender(ufGender)
-# while gender==0:
-#     sorry()
-#     ufGender = askGender()
-#     gender = getGender(ufGender)
-# print('To help you keep a record of your symptoms and enable us to provide you with better assistance, we would like you to provide us with your email. This is mandatory.')
-# email = getEmail()
-# print('Your ZipCode would enable us to provide personalised suggestions for hospitals. This is mandatory.')
-# zip = getZip()
-# sa=smokeAndAlc()
-# #sa = (smoke*10)+alc
-# existingDiseases = extDisease()
+write_chat('I\'m DrBot, your personal health assistant.')
+askName()
 
-##print('name = {}, age = {}'.format(name[0],age))
-#print Everything
-##print(name, age, gender, email, zip, sa, existingDiseases)
-print('Okay {} '.format(name[0]))
-disease = diagnose()
-print(disease)
+
+def generate_response(user_text):
+
+    intent = classify_intent.get_intent(user_text)
+    print(intent)
+    data = None
+
+    if intent == 'Consult':
+        type_of_doctors = bot_logic.consult(user_text)
+        if len(type_of_doctors) == 1:
+            type_of_doctors[0] = type_of_doctors[0].strip()
+            type_of_doctors[0] = type_of_doctors[0].replace('\n','')
+            type_of_doctors[0] = type_of_doctors[0].title()
+            if type_of_doctors[0] == 'Doctor':
+                type_of_doctors[0] = 'General Physician'
+            type_of_doctors[0] = type_of_doctors[0].replace(' ','%20')
+            print('*'+type_of_doctors[0]+'*')
+            scrapped_data = scrapper.scrap_data('Hyderabad', type_of_doctors[0], 'Doctor', 0)
+            data = {'message': scrapped_data, 'msg_type': 'display_cards'}
+        else:
+            write_chat('Which of the following type of Doctor do you mean?')
+            msg = [{'headline':'', 'body':type_of_doctors[i]} for i in range(len(type_of_doctors))]
+            data = {'message': msg, 'msg_type': 'ask_options', 'id': message_id}
+        # scrap data and show doctors
+    #
+    # elif intent == 'Symptom/Disease':
+    #     disease = bot_logic.diagnose(user_text)
+    #     return disease
+        # tell about the disease
+
+    # else: # Out of Domain
+    #     reply = OOD_handler.get_reply(user_text)
+    #     write_chat(reply)
+    print(data)
+    return data
+
+@app.route('/stream')
+def stream():
+    global push_data
+    def eventStream():
+        global push_data
+        while True:
+            yield 'data: {}\n\n'.format(push_data[0])
+            push_data = push_data[1:]
+            break
+    while(len(push_data) != 0):
+        time.sleep(0.5)
+        return Response(eventStream(), mimetype="text/event-stream")
+    return Response('', mimetype="text/event-stream")
+
+@app.route('/get_reply', methods=['GET','POST'])
+def get_reply():
+    global push_data, message_id, asked_name, name
+    # chat_msg, display_cards
+    print('REQUEST:'+str(request.form.to_dict()))
+    received_data = request.form.to_dict()['data']
+    message_id += 1
+
+    if asked_name:
+        name = getName(received_data)
+        reply = ['Okay ' + name[0] + ', I can help you find a doctor or I can diagnose with a simple symptom assisment.']
+        reply = {'message': reply, 'msg_type': 'chat_msg'}
+        asked_name = False
+
+    else:
+        # scrapped_data = [{'headline':'This is first headline', 'body': 'This is first body'}, {'headline':'This is second headline', 'body': 'This is second body'}]
+        # data = {'message': scrapped_data, 'msg_type': 'ask_options', 'id': message_id}
+        # print('About to push again...')
+        # push_data.append('Push data again...')
+        reply = generate_response(received_data)
+        print('Message sent by client: ', received_data)
+    # =============================================================================
+    #     scrapped_data = scrap_data('Bangalore', 'asdfasdfsf', 'Doctor Name', 0)
+    #     data = {'message': scrapped_data, 'msg_type': 'display_cards'}
+    #     print(scrapped_data)
+    # =============================================================================
+        # reply = [reply]
+        # reply = {'message': reply, 'msg_type': 'chat_msg'}
+
+    # =============================================================================
+    #     scrapped_data = scrap_data('Bangalore', 'Psychiatrist', 'Doctor', 0)
+    #     data = {'message': scrapped_data, 'msg_type': 'display_cards'}
+    #
+    #     scrapped_data = scrap_data('Bangalore', 'Apollo', 'Hospital', 0)
+    #     data = {'message': scrapped_data, 'msg_type': 'display_cards'}
+    #
+    #     scrapped_data = scrap_data('Bangalore', 'Apollo', 'Clinic', 0)
+    #     data = {'message': scrapped_data, 'msg_type': 'display_cards'}
+    # =============================================================================
+
+    return make_response(jsonify(reply), 201)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
+    app.config["REDIS_URL"] = "redis://localhost"
+    app.register_blueprint(sse, url_prefix='/stream')

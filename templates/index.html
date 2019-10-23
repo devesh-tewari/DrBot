@@ -11,7 +11,43 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 	<script type="text/javascript">
 		var id=0;
-		function appendMessage(message, by, msg_type) {
+		var indices = [];
+		$(document).on("click", '.list_item', function(e) {
+		    console.log('Item clicked...')
+		    var item_id = $(this).attr('id');
+		    if(!e.ctrlKey) {
+		        $(this).css({'background': '#1adda4'});
+		        var index = indices.indexOf(item_id);
+		        if (index > -1) {
+					indices.splice(index, 1);
+				}
+		    } else {
+		    	indices.push(item_id);
+			    $(this).css({'background': 'blue'});
+		    }
+		    console.log(indices);
+		});
+		$(document).on("click", '.option_button', function(e) {
+			sending_data = {'data': indices.join(","), 'request_type':'indices'};
+			console.log('Sending data....');
+			console.log(JSON.stringify(sending_data));
+			if(indices.length>0) {
+				indices = [];
+				$.ajax({
+		            url: '/get_reply',
+		            data: sending_data,
+                    type: 'POST',
+		            success: function(response) {
+		            	appendMessage(response.message, 'bot', response.msg_type, response.id);
+		            },
+		            error: function(error) {
+		            	appendMessage(error, 'bot', 'error');
+		                console.log(error);
+		            }
+		        });
+			}
+		})
+		function appendMessage(message, by, msg_type, message_id) {
 			if(by == 'human') {
 				$('#user_message').val('');
 				$('<div>',{
@@ -23,7 +59,7 @@
 					    'class' : 'chat-message',
 					    'text': message[0]
 				  	}))
-				}).appendTo('.chatlogs');				
+				}).appendTo('.chatlogs');
 			} else if(by == 'bot' && msg_type == 'chat_msg') {
 				$('<div>',{
 					'class' : 'chat bot',
@@ -41,7 +77,6 @@
 					'class': 'liquid-slider',
 					'id': 'idNum'+id.toString()
 				}).appendTo('.chatlogs');
-
 				for(var i=0;i<message.length;i++) {
 					$('<div>', {
 						'class': 'card',
@@ -72,31 +107,58 @@
 					}).appendTo('#idNum'+id.toString())
 					console.log(message[i]);
 				}
-
 				$('#idNum'+id.toString()).liquidSlider({
 					dynamicTabsHtml: false,
 					dynamicTabs: false,
 				});
-
 			} else if(msg_type == 'ask_options') {
-				
-			}
+				console.log(message);
+				console.log(message_id);
+				$('<ul>', {
+					'class': 'options_list',
+					'id': message_id+'ul_list'
+				}).css({'list-style': 'none', 'margin-bottom':'10px'}).appendTo('.chatlogs');
 
+				for(var i=0;i<message.length;i++) {
+					$('<li>', {
+						'class': 'list_item',
+						'id': message_id+':'+i.toString(),
+						'html': $('<div>', {
+							'html': $('<h3>', {
+								'text': message[i].headline
+							}).add($('<span>', {
+								'text': message[i].body
+							}))
+						})
+					}).css({'padding': '10px', 'width':'100%', 'margin': '5px 10px', 'background': '#1adda4', 'border-radius': '10px', 'color': '#fff', 'font-size': '18px'}).appendTo('#'+message_id+'ul_list');
+				}
+				$('<li>', {
+					'class': 'option_button',
+					'id': message_id+':button',
+					'html': $('<span>', {
+						'text':'Send Response'
+					})
+				}).css({'cursor':'pointer', 'padding': '10px', 'width':'100%', 'margin': '5px 10px', 'background': '#1ddced', 'border-radius': '10px', 'color': '#fff', 'font-size': '18px', 'text-align':'center'}).appendTo('#'+message_id+'ul_list');
+			}
 			var scroll_bottom = $('.chatlogs');
 			var height = scroll_bottom[0].scrollHeight;
 			scroll_bottom.scrollTop(height);
 		}
-
+		var eventSource = new EventSource("/stream")
+        eventSource.onmessage = function(e) {
+        	appendMessage([e.data], 'bot', 'chat_msg');
+        };
 		$(function() {
 		  	$('#send_message').bind('click', function() {
-		  		self_message = [$('#user_message').val()];
-		  		appendMessage(self_message, 'human', '');
+		  		var self_message = [$('#user_message').val()];
+		  		appendMessage(self_message, 'human', '', '');
+		  		var sending_data = {'data': self_message[0], 'request_type': 'message'};
 		  		$.ajax({
 		            url: '/get_reply',
-		            data: $('#user_message').val(),
-		            type: 'POST',
+		            data: sending_data,
+                     type: 'POST',
 		            success: function(response) {
-		            	appendMessage(response.message, 'bot', response.msg_type);
+		            	appendMessage(response.message, 'bot', response.msg_type, response.id);
 		            },
 		            error: function(error) {
 		            	appendMessage(error, 'bot', 'error');
@@ -111,13 +173,13 @@
 
 	<div class="chatbox">
 		<div class="chatlogs">
-			
+
 		</div>
 		<div class="chat-form">
 			<textarea id="user_message"></textarea>
 			<button id="send_message">Send</button>
 		</div>
 	</div>
-	
+
 </body>
 </html>

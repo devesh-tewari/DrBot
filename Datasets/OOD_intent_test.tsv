@@ -1,0 +1,14 @@
+fnsjd bfhdsbf jaodw	DontUnderstand
+mkxiajd ndsaj	DontUnderstand
+i want to go to a movie	OutOfDomain
+book bus tickets	OutOfDomain
+what medicine should i take for headache	Unknown
+book an appointment with dr kumar	Unknown
+take a look at my rashes	PassToDoctor
+check my heart beat	PassToDoctor
+what is your sex	LeaveToHuman
+how old are you	LeaveToHuman
+can you show me doctors	Positive
+do you answer anything	Positive
+is your knowledge infinite	Negative
+do you have kids	Negative

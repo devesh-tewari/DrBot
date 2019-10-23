@@ -5,22 +5,13 @@ import codecs
 import json
 import csv
 import spacy
-import sklearn
 import numpy as np
-import matplotlib.pyplot as plt
-from sklearn import model_selection
 from time import time
-from sklearn.feature_extraction.text import TfidfVectorizer, HashingVectorizer, CountVectorizer
-from sklearn.feature_selection import SelectFromModel, SelectKBest, chi2
-from sklearn.model_selection import StratifiedShuffleSplit
-from sklearn.neighbors.nearest_centroid import NearestCentroid
 import numpy as np
 import pickle
 
 
 nlp=spacy.load('en_core_web_lg')
-
-intent_dict = {'Consult':0, 'Symptom/Disease':1, 'OutOfDomain':2}
 
 def preprocess(doc):
     clean_tokens = []
@@ -50,23 +41,6 @@ def semhash_corpus(corpus):
         new_corpus.append(" ".join(map(str,tokens)))
     return new_corpus
 
-from sklearn.linear_model import RidgeClassifier
-from sklearn.pipeline import Pipeline
-from sklearn.svm import LinearSVC
-from sklearn.linear_model import SGDClassifier
-from sklearn.linear_model import Perceptron
-from sklearn.linear_model import PassiveAggressiveClassifier
-from sklearn.naive_bayes import BernoulliNB, MultinomialNB
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.neighbors import NearestCentroid
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.neural_network import MLPClassifier
-from sklearn.utils.extmath import density
-from sklearn import metrics
-from sklearn.cluster import KMeans
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import GridSearchCV
-
 
 def ngram_encode(str_test, HD_aphabet, aphabet, n_size): # method for mapping n-gram statistics of a word to an N-dimensional HD vector
     HD_ngram = np.zeros(HD_aphabet.shape[1]) # will store n-gram statistics mapped to HD vector
@@ -90,6 +64,9 @@ aphabet = 'abcdefghijklmnopqrstuvwxyz#' #fix the alphabet. Note, we assume that 
 np.random.seed(1) # for reproducibility
 HD_aphabet = 2 * (np.random.randn(len(aphabet), N) < 0) - 1 # generates bipolar {-1, +1}^N HD vectors; one random HD vector per symbol in the alphabet
 
+filename = 'Models/main_intent_model.sav'
+# pickle.dump(clf, open(filename, 'wb'))
+clf = pickle.load(open(filename, 'rb'))
 
 def get_intent(text):
     X_test_raw = [text]
@@ -97,10 +74,18 @@ def get_intent(text):
     X_test_raw[0] = ngram_encode(X_test_raw[0], HD_aphabet, aphabet, n_size)
     X_test = X_test_raw
 
-    filename = 'Models/main_intent_model.sav'
-    # pickle.dump(clf, open(filename, 'wb'))
-    clf = pickle.load(open(filename, 'rb'))
     pred = clf.predict(X_test)
     return pred[0]
 
-# print(get_intent('i wanna see a doctor'))
+filename = 'Models/OOD_intent_model.sav'
+# pickle.dump(clf, open(filename, 'wb'))
+clf_OOD = pickle.load(open(filename, 'rb'))
+
+def get_intent_OOD(text):
+    X_test_raw = [text]
+    X_test_raw = semhash_corpus(X_test_raw)
+    X_test_raw[0] = ngram_encode(X_test_raw[0], HD_aphabet, aphabet, n_size)
+    X_test = X_test_raw
+
+    pred = clf_OOD.predict(X_test)
+    return pred[0]

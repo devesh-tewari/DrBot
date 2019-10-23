@@ -1,0 +1,6 @@
+DontUnderstand	OutOfDomain	Unknown	PassToDoctor	LeaveToHuman	Positive	Negative
+Sorry I didn't get that.	I can only answer you for medical domain.	Sorry! That is out of my capability.	I think you should ask this to a real doctor instead.	You might want to put that one to a real human.	Yes.	No.
+What? That doesn't make sense to me.	Sorry! I can answer you questions in my domain.	It is not possible for me to do that.	You should see a doctor for this.	I think you should ask this to a real human instead.	Umm.. Yes.	Nope.
+That's nonsense.	Please ask me about medical domain only.	I am not capable to do that.	Only a doctor can do that, not me.	Hello? You are taking to a bot. Not a human!	Yup.	Nah.
+Stop mumbling. Just kidding, I didn’t get that.	I cannot do that for you. That is out of medical domain.	Sorry! I cannot do that for you.	I cannot do that. You should ask a doctor.	I am a bot, only a human can answer that.	Surely Yes.	Umm.. No.
+Please ask something sensible.	Sorry! I am programmed for medical domain only.	That is something that i cannot do.	You need to see a doctor for this.	You should ask this to a human.	I would say yes.	I would say no.

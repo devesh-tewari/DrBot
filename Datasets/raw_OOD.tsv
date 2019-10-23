@@ -1,0 +1,86 @@
+fjdsfj djsfjmo jfsikjfe fjeiks sdkmfje	DontUnderstand
+aowd anscmxz wojr dewm,fo bmcos	DontUnderstand
+fds fjsk cnxm	DontUnderstand
+qpdod mckx fieonsf kfnejsnk	DontUnderstand
+fndsijunfdnzcneuihfhfeidhnfd	DontUnderstand
+aaaaaaaaaaaaaaaa	DontUnderstand
+mclkdsncdh	DontUnderstand
+dmaklsjd sdnk	DontUnderstand
+dniowap apdjmxm,x jdihad nclzw ndjas dsaj	DontUnderstand
+deojadj d osd s m ls w a s z oq p	DontUnderstand
+qwertyuiop	DontUnderstand
+casnjcsh hashud nsan	DontUnderstand
+fkasodk	DontUnderstand
+jjjjjjjjjjjjjjjjjjjj	DontUnderstand
+show me hotels nearby	OutOfDomain
+book a hotel	OutOfDomain
+book a cab	OutOfDomain
+i want to go to x	OutOfDomain
+i want to rent a car	OutOfDomain
+rent a bike	OutOfDomain
+show me restaurants here	OutOfDomain
+where can i have lunch or dinner	OutOfDomain
+show me flight tickets	OutOfDomain
+i want a flight ticket from x to y	OutOfDomain
+how do i go to pochinki	OutOfDomain
+i want to eat in a pub or bar	OutOfDomain
+book train tickets for tomorrow	OutOfDomain
+book movie ticket	OutOfDomain
+show me latest movies	OutOfDomain
+i want to eat food	OutOfDomain
+tell me a joke	OutOfDomain
+take me to the hospital	Unknown
+can you kill a doctor	Unknown
+kill a doctor	Unknown
+can you suggest me a medicine for headache	Unknown
+i want some medicines for x	Unknown
+what medicine should i take if i have x	Unknown
+take me to nearest hospital	Unknown
+suggest me a medicine for x	Unknown
+book an appointment with doctor	Unknown
+i want to book an appointment with a dentist	Unknown
+Can you cure my disease	PassToDoctor
+cure my disease	PassToDoctor
+can you heal me	PassToDoctor
+heal my pain	PassToDoctor
+can you bandage me	PassToDoctor
+i want a crepe bandage	PassToDoctor
+can you examine my body	PassToDoctor
+examine my body	PassToDoctor
+take a look at my fingers	PassToDoctor
+take a look at my legs	PassToDoctor
+do you have a brain	LeaveToHuman
+do you have sex	LeaveToHuman
+i want to have sex	LeaveToHuman
+what do you look like	LeaveToHuman
+can i see your body	LeaveToHuman
+what is your age	LeaveToHuman
+what is your height	LeaveToHuman
+what are your hobbies	LeaveToHuman
+what is your heart rate	LeaveToHuman
+what are you interests	LeaveToHuman
+do you feel emotions	LeaveToHuman
+are you a medical chatbot	Positive
+are you a bot	Positive
+do you like the medical field	Positive
+can you answer anything about medical domain	Positive
+can i ask you any symptom	Positive
+can i ask you anything	Positive
+can i provide you any symptom i want	Positive
+can i tell you anything	Positive
+can i trust you	Positive
+do you like to sing	Positive
+can i talk to you	Positive
+will you listen to me	Positive
+Do you have a wife	Negative
+are you married	Negative
+are you single	Negative
+can you provide medicine for a disease	Negative
+can you tell a medicine for any disease	Negative
+are you a real human	Negative
+are you real	Negative
+can you think like a human	Negative
+are you a best chatbot	Negative
+are you the best bot	Negative
+can you answer anything	Negative
+can every disease be cured	Negative

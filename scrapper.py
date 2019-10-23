@@ -1,5 +1,5 @@
 import requests
-from bs4 import BeautifulSoup 
+from bs4 import BeautifulSoup
 import json
 
 def generateQuery(location, search_tag, query_type, page=None):
@@ -17,7 +17,7 @@ def generateQuery(location, search_tag, query_type, page=None):
     elif query_type=='Doctor Name':
         modified_search_tag = '%20'.join(tag_arr);
         url = 'https://www.practo.com/search?results_type=doctor&q=%5B%7B"word"%3A"'+modified_search_tag+'"%2C"autocompleted"%3Atrue%2C"category"%3A"doctor_name"%7D%5D&city='+location
-    
+
     if page != None:
         url = url+'&page='+str(page)
     return url

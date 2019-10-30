@@ -31,6 +31,12 @@ message_id_options = {}
 first_symptom_done = False
 asked_symptom = False
 
+def clear_symptoms():
+    global user_symptoms, first_symptom_done, asked_symptom
+    user_symptoms = []
+    first_symptom_done = False
+    asked_symptom = False
+
 def write_chat(text):
     global push_data
     push_data.append(text)
@@ -116,10 +122,15 @@ def askLocation():
 
 disease_symptom = pd.read_csv('Datasets/disease_symptom.csv', engine='python')
 
-def generate_response(user_text, options_flag=False):
+def generate_response(user_text, options_flag=False, known_intent=None, user_negative=None):
     global location, user_symptoms, message_id, message_id_intent, message_id_options, first_symptom_done, asked_symptom, disease_symptom
 
-    intent = classify_intent.get_intent(user_text)
+    if known_intent == 'Symptom/Disease':
+        intent = 'Symptom/Disease'
+
+    else:
+        intent = classify_intent.get_intent(user_text)
+
     print(intent)
     message_id_intent[message_id] = intent
     data = None
@@ -155,8 +166,11 @@ def generate_response(user_text, options_flag=False):
 
             else:
                 possible_diseases = copy.deepcopy(disease_symptom)
+                print('PD:'+str(possible_diseases['Disease'].unique()))
                 for s in user_symptoms:
                     possible_diseases = possible_diseases[possible_diseases['Symptom'] == s]
+                    possible_diseases = disease_symptom[disease_symptom['Disease'].isin(possible_diseases['Disease'])]
+                    print('PD:'+str(possible_diseases['Disease'].unique()))
 
                 possible_diseases = possible_diseases.sort_values(by='Weight', ascending=False)
 
@@ -164,7 +178,7 @@ def generate_response(user_text, options_flag=False):
                     print(len(possible_diseases['Disease'].unique()))
                     symptom_options = []
                     for disease in possible_diseases['Disease'].unique():
-                        symp_in_this_dis = disease_symptom[disease_symptom['Disease'] == disease]['Symptom']
+                        symp_in_this_dis = list(disease_symptom[disease_symptom['Disease'] == disease]['Symptom'])
                         s = random.choice(symp_in_this_dis)
                         if s in user_symptoms:
                             s = random.choice(symp_in_this_dis)
@@ -174,20 +188,23 @@ def generate_response(user_text, options_flag=False):
 
                     write_chat('Please mark the symptoms that you have')
                     time.sleep(2)
+                    message_id_options[message_id] = symptom_options
                     msg = [{'headline':'', 'body':symptom_options[i]} for i in range(len(symptom_options))]
                     data = {'message': msg, 'msg_type': 'ask_options', 'id': message_id}
 
                 else:
+                    print('PD:'+str(possible_diseases['Disease'].unique()))
                     if len(possible_diseases['Disease'].unique()) == 0:
                         reply = 'Sorry! There is no disease in my knowledge with the symptoms you provided.'
                     elif len(possible_diseases['Disease'].unique()) == 1:
-                        reply = 'Most likely you are suffing from '+possible_diseases[0]
+                        reply = 'Most likely you are suffing from '+list(possible_diseases['Disease'])[0]
                     else:
                         reply = 'Possible diseases are : '
                         for dis in possible_diseases['Disease'].unique():
                             reply += dis + ' and '
                         reply = reply[:-5]
                     data = {'message': [reply], 'msg_type': 'chat_msg'}
+                    clear_symptoms()
 
             first_symptom_done = True
         return data
@@ -211,56 +228,109 @@ def generate_response(user_text, options_flag=False):
             data = {'message': msg, 'msg_type': 'ask_options', 'id': message_id}
 
     elif intent == 'Symptom/Disease':
-        symp = bot_logic.getSymptom(user_text)
-        if len(symp) == 1:
-            user_symptoms.append(symp[0])
-            if not first_symptom_done:
-                reply = 'Please tell any other symptoms that you want to explain? You can reply to this with a "no".'
-                data = {'message': [reply], 'msg_type': 'chat_msg'}
-                asked_symptom = True
+        if user_negative:
+            possible_diseases = copy.deepcopy(disease_symptom)
+            print('PD:'+str(possible_diseases['Disease'].unique()))
+            for s in user_symptoms:
+                possible_diseases = possible_diseases[possible_diseases['Symptom'] == s]
+                possible_diseases = disease_symptom[disease_symptom['Disease'].isin(possible_diseases['Disease'])]
+                print('PD:'+str(possible_diseases['Disease'].unique()))
 
-            else:
-                possible_diseases = copy.deepcopy(disease_symptom)
-                for s in user_symptoms:
-                    possible_diseases = possible_diseases[possible_diseases['Symptom'] == s]
+            possible_diseases = possible_diseases.sort_values(by='Weight', ascending=False)
 
-                possible_diseases = possible_diseases.sort_values(by='Weight', ascending=False)
-
-                if len(possible_diseases['Disease'].unique()) > 4:
-                    print(len(possible_diseases['Disease'].unique()))
-                    symptom_options = []
-                    for disease in possible_diseases['Disease'].unique():
-                        symp_in_this_dis = disease_symptom[disease_symptom['Disease'] == disease]['Symptom']
+            if len(possible_diseases['Disease'].unique()) > 4:
+                print(len(possible_diseases['Disease'].unique()))
+                symptom_options = []
+                for disease in possible_diseases['Disease'].unique():
+                    symp_in_this_dis = list(disease_symptom[disease_symptom['Disease'] == disease]['Symptom'])
+                    print('symp_in_this_dis'+str(symp_in_this_dis))
+                    print(symp_in_this_dis[0])
+                    print(type(symp_in_this_dis))
+                    print(type(symp_in_this_dis[0]))
+                    s = random.choice(symp_in_this_dis)
+                    if s in user_symptoms:
                         s = random.choice(symp_in_this_dis)
                         if s in user_symptoms:
                             s = random.choice(symp_in_this_dis)
-                            if s in user_symptoms:
-                                s = random.choice(symp_in_this_dis)
-                        symptom_options.append(s)
+                    symptom_options.append(s)
 
-                    write_chat('Please mark the symptoms that you have')
-                    time.sleep(2)
-                    msg = [{'headline':'', 'body':symptom_options[i]} for i in range(len(symptom_options))]
-                    data = {'message': msg, 'msg_type': 'ask_options', 'id': message_id}
+                write_chat('Please mark the symptoms that you have')
+                time.sleep(2)
+                message_id_options[message_id] = symptom_options
+                msg = [{'headline':'', 'body':symptom_options[i]} for i in range(len(symptom_options))]
+                data = {'message': msg, 'msg_type': 'ask_options', 'id': message_id}
 
+            else:
+                print('PD:'+str(possible_diseases['Disease'].unique()))
+                if len(possible_diseases['Disease'].unique()) == 0:
+                    reply = 'Sorry! There is no disease in my knowledge with the symptoms you provided.'
+                elif len(possible_diseases['Disease'].unique()) == 1:
+                    reply = 'Most likely you are suffing from '+list(possible_diseases['Disease'])[0]
                 else:
-                    if len(possible_diseases['Disease'].unique()) == 0:
-                        reply = 'Sorry! There is no disease in my knowledge with the symptoms you provided.'
-                    elif len(possible_diseases['Disease'].unique()) == 1:
-                        reply = 'Most likely you are suffing from '+possible_diseases[0]
-                    else:
-                        reply = 'Possible diseases are : '
-                        for dis in possible_diseases['Disease'].unique():
-                            reply += dis + ' and '
-                        reply = reply[:-5]
-                    data = {'message': [reply], 'msg_type': 'chat_msg'}
+                    reply = 'Possible diseases are : '
+                    for dis in possible_diseases['Disease'].unique():
+                        reply += dis + ' and '
+                    reply = reply[:-5]
+                clear_symptoms()
+                data = {'message': [reply], 'msg_type': 'chat_msg'}
 
         else:
-            msg = [{'headline':'', 'body':symp[i]} for i in range(len(symp))]
-            data = {'message': msg, 'msg_type': 'ask_options', 'id': message_id}
-            message_id_options[message_id] = symp
-            write_chat('Which of the these symptoms did you mean?')
-            time.sleep(2)
+            symp = bot_logic.getSymptom(user_text)
+            if len(symp) == 1:
+                user_symptoms.append(symp[0])
+                if not first_symptom_done:
+                    reply = 'Please tell any other symptoms that you want to explain? You can reply to this with a "no".'
+                    data = {'message': [reply], 'msg_type': 'chat_msg'}
+                    asked_symptom = True
+
+                else:
+                    possible_diseases = copy.deepcopy(disease_symptom)
+                    print('PD:'+str(possible_diseases['Disease'].unique()))
+                    for s in user_symptoms:
+                        possible_diseases = possible_diseases[possible_diseases['Symptom'] == s]
+                        possible_diseases = disease_symptom[disease_symptom['Disease'].isin(possible_diseases['Disease'])]
+                        print('PD:'+str(possible_diseases['Disease'].unique()))
+
+                    possible_diseases = possible_diseases.sort_values(by='Weight', ascending=False)
+
+                    if len(possible_diseases['Disease'].unique()) > 4:
+                        print(len(possible_diseases['Disease'].unique()))
+                        symptom_options = []
+                        for disease in possible_diseases['Disease'].unique():
+                            symp_in_this_dis = list(disease_symptom[disease_symptom['Disease'] == disease]['Symptom'])
+                            s = random.choice(symp_in_this_dis)
+                            if s in user_symptoms:
+                                s = random.choice(symp_in_this_dis)
+                                if s in user_symptoms:
+                                    s = random.choice(symp_in_this_dis)
+                            symptom_options.append(s)
+
+                        write_chat('Please mark the symptoms that you have')
+                        time.sleep(2)
+                        message_id_options[message_id] = symptom_options
+                        msg = [{'headline':'', 'body':symptom_options[i]} for i in range(len(symptom_options))]
+                        data = {'message': msg, 'msg_type': 'ask_options', 'id': message_id}
+
+                    else:
+                        print(user_symptoms)
+                        if len(possible_diseases['Disease'].unique()) == 0:
+                            reply = 'Sorry! There is no disease in my knowledge with the symptoms you provided.'
+                        elif len(possible_diseases['Disease'].unique()) == 1:
+                            reply = 'Most likely you are suffing from '+list(possible_diseases['Disease'])[0]
+                        else:
+                            reply = 'Possible diseases are : '
+                            for dis in possible_diseases['Disease'].unique():
+                                reply += dis + ' and '
+                            reply = reply[:-5]
+                        clear_symptoms()
+                        data = {'message': [reply], 'msg_type': 'chat_msg'}
+
+            else:
+                msg = [{'headline':'', 'body':symp[i]} for i in range(len(symp))]
+                data = {'message': msg, 'msg_type': 'ask_options', 'id': message_id}
+                message_id_options[message_id] = symp
+                write_chat('Which of the these symptoms did you mean?')
+                time.sleep(2)
 
         first_symptom_done = True
 
@@ -295,7 +365,7 @@ askName()
 
 @app.route('/get_reply', methods=['GET','POST'])
 def get_reply():
-    global push_data, message_id, asked_name, name, asked_location, location
+    global push_data, message_id, asked_name, name, asked_location, location, asked_symptom
     # chat_msg, display_cards
     print('REQUEST:'+str(request.form.to_dict()))
 
@@ -318,6 +388,17 @@ def get_reply():
         reply = ['Got it. I can help you find a doctor or I can diagnose with a simple symptom assisment.']
         reply = {'message': reply, 'msg_type': 'chat_msg'}
         asked_location = False
+
+    elif asked_symptom:
+        user_negative = False
+        for w in received_data.split():
+            if 'no' in w.lower():
+                user_negative = True
+        if user_negative:
+            reply = generate_response(received_data, known_intent='Symptom/Disease', user_negative=True)
+        else:
+            reply = generate_response(received_data, known_intent='Symptom/Disease')
+        asked_symptom = False
 
     else:
         reply = generate_response(received_data)
